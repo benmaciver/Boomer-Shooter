@@ -1,0 +1,46 @@
+    // static Dictionary<string, int> CalculateEnemySpawn(Dictionary<string, float> percentages, int enemiesToSpawn)
+    // {
+    //     string[] gunTypes = { "AK-47", "MP5", "Sniper Rifle", "Pistol", "Pump Shotgun" };
+    //     int bestScore = int.MinValue;
+    //     Dictionary<string, int> bestEnemyCombination = new Dictionary<string, int>();
+
+    //     for (int i = 0; i <= enemiesToSpawn; i++)
+    //     {
+    //         for (int j = 0; j <= enemiesToSpawn - i; j++)
+    //         {
+    //             for (int k = 0; k <= enemiesToSpawn - i - j; k++)
+    //             {
+    //                 for (int l = 0; l <= enemiesToSpawn - i - j - k; l++)
+    //                 {
+    //                     int m = enemiesToSpawn - i - j - k - l;
+
+    //                     int currentScore = 0;
+
+    //                     for (int n = 0; n < gunTypes.Length; n++)
+    //                     {
+    //                         currentScore += (n == Array.IndexOf(gunTypes, percentages.First(x => x.Value == percentages.Values.Max()).Key)) ? i * (n == 0 ? 1 : (n == 1 ? -1 : 0)) :
+    //                                          (n == 1) ? j * (n == 1 ? 1 : (n == 2 ? -1 : 0)) :
+    //                                          (n == 2) ? k * (n == 2 ? 1 : (n == 3 ? -1 : 0)) :
+    //                                          (n == 3) ? l * (n == 3 ? 1 : (n == 4 ? -1 : 0)) :
+    //                                          m * (n == 4 ? 1 : 0);
+    //                     }
+
+    //                     if (currentScore > bestScore)
+    //                     {
+    //                         bestScore = currentScore;
+    //                         bestEnemyCombination = new Dictionary<string, int>
+    //                         {
+    //                             { "sniper enemy", i },
+    //                             { "Ghoul", j },
+    //                             { "ar enemy", k },
+    //                             { "smg enemy", l },
+    //                             { "shotgun enemy", m }
+    //                         };
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     return bestEnemyCombination;
+    // }
