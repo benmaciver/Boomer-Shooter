@@ -150,6 +150,10 @@ public class PlayerController : MonoBehaviour, Controller
             Destroy(other.gameObject);
             uiController.DisplayPopUpMessage("Frag Grenade Picked Up");
         }
+        if (other.gameObject.CompareTag("Water"))
+        {
+            transform.position = startPos;
+        }
     }
     public void EquipSfx(){
         Instantiate(equipNoise);

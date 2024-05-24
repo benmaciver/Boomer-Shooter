@@ -115,6 +115,15 @@ public class UIManagement : MonoBehaviour
                 DisplayPopUpMessage("Health Kit Used");
             }
         }
+        else if (pickup.tag == "Door")
+        {
+            weaponPickup.text = "Press F Key / X Button to open door";
+            if (Input.GetKeyDown(KeyCode.F)|| Input.GetKeyDown("joystick button 2"))
+            {
+                int scene = int.Parse(pickup.name);
+                SceneManager.LoadScene(scene);
+            }
+        }
         else
             weaponPickup.text = "";
     }

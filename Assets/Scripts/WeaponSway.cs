@@ -8,7 +8,7 @@ public class WeaponSway : MonoBehaviour
     public float bobSpeed; 
     public CameraController cameraController;
 
-    private float minBobHeight = -0.04f,maxBobHeight = 0.04f;
+    private float minBobHeight = -0.02f,maxBobHeight = 0.02f;
     private float startHeight;
     private int direction = 1;
     private string XAxis, YAxis;

@@ -19,6 +19,7 @@ TagManager:
   - User Name
   - Indestructable Data
   - Difficulty
+  - Water
   layers:
   - Default
   - TransparentFX

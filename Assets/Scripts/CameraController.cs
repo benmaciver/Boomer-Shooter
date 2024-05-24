@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     public string YAxis;
     // Private variables for internal use
     private Ray ray;
-    private float maxRaycastDistance = 5f;
+    private float maxRaycastDistance = 2.5f;
     private UIManagement uiManager;
     
     // Start is called before the first frame update

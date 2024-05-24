@@ -135,8 +135,11 @@ public class GunController : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (totalAmmo <=0)
+        if (ammoReserves < 0)
+            ammoReserves = 0;
+        if (totalAmmo <= 0)
             DestroyIfNotEquipped();
+
         if (OnFloor()){
             if (arms !=null)
                 arms.SetActive(false);
@@ -172,13 +175,21 @@ public class GunController : MonoBehaviour
 
         if ((Input.GetKeyDown(reloadButton) || Input.GetKeyDown(controllerReloadButton)) && isEquipped)
         {
-            if (ammoReserves > 0){
-                animation.Play("Reload");
-                audio.Play();
-                if (totalAmmo > magCapacity)
-                    magSize = magCapacity;
-                else magSize = totalAmmo;
-                ammoReserves = totalAmmo - magSize;
+            if (ammoReserves > 0)
+            {
+                if (!animation.isPlaying)
+                {
+                    if (totalAmmo > magCapacity)
+                    {
+                        totalAmmo -= magSize;
+                        magSize = magCapacity;
+                    }
+
+                    else magSize = totalAmmo;
+                    ammoReserves = totalAmmo - magSize;
+                    animation.Play("Reload");
+                    audio.Play();
+                }
             }
             
             
