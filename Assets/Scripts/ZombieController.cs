@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class ZombieController : EnemyController
 {
     public float attackRange = 2f;
     public int attackDamage = 10;
+    public float attackAnimationLength = 2.617f;
 
     private float attackCooldown;
     private Animator anim;
     private bool isAttacking;
     private float animLength;
     private float distanceToPlayer;
+    
     
     private Vector3 targetPosition;
     
@@ -21,12 +24,14 @@ public class ZombieController : EnemyController
         base.Start();
         anim = GetComponent<Animator>();
         player = GameObject.FindWithTag("Player").transform;
+        attackCooldown = 0f;
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        attackCooldown -= Time.deltaTime;
         base.Update();
         if (!dead)
         {
@@ -58,7 +63,13 @@ public class ZombieController : EnemyController
                 {
 
                     
-                    anim.SetBool("In Range", true);
+                    
+                    if (attackCooldown <= 0f)
+                    {
+                        anim.SetBool("In Range", true);
+                        AttackPlayer();
+                    }
+                    
 
                 }
                 else
@@ -77,15 +88,42 @@ public class ZombieController : EnemyController
             }
 
             if (dead)
-                Destroy(gameObject);
-        }
-        bool IsPlayingAnimationWithTag(string tag)
-        {
-            // Get the current AnimatorStateInfo from the Animator
-            AnimatorStateInfo currentAnimatorState = anim.GetCurrentAnimatorStateInfo(0);
+            {
+                Destroy(agent);
+                Destroy(anim);
+                Destroy(this);
+                Destroy(GetComponent<Collider>());
 
-            // Check if the current state's tag matches the specified tag
-            return currentAnimatorState.IsTag(tag);
+            }
+                
         }
+        
+        
+
+
+    }
+    private bool IsPlayingAnimationWithTag(string tag)
+    {
+        // Get the current AnimatorStateInfo from the Animator
+        AnimatorStateInfo currentAnimatorState = anim.GetCurrentAnimatorStateInfo(0);
+
+        // Check if the current state's tag matches the specified tag
+        return currentAnimatorState.IsTag(tag);
+    }
+    private Collider[] GetAllChildrenColliders()
+    {
+        // Get all Collider components in the current GameObject and its children
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+
+        return colliders;
+    }
+    private void AttackPlayer()
+    {
+        attackCooldown = attackAnimationLength;
+        Invoke("DamagePlayer", attackAnimationLength / 2);
+    }
+    private void DamagePlayer()
+    {
+        player.GetComponent<PlayerController>().TakeDamage(attackDamage);
     }
 }

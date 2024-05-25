@@ -61,7 +61,7 @@ public class EnemyController : MonoBehaviour, Controller
         if (playerGameObj == null)
             Destroy(this);
 
-        CheckIfFlyingThroughVoid();
+        //CheckIfFlyingThroughVoid();
         //Corrects detection range if it is out of bounds
         if (detectionRange <= 6f)
             detectionRange = 6f;   

@@ -335,18 +335,18 @@ public class GunController : MonoBehaviour
             {
                 
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
+                Debug.Log("bullet hit: " + hit.collider.gameObject.name);
                 if (hit.collider.gameObject.tag == "Enemy")
                 {
-                    EnemyController enemy = hit.collider.gameObject.GetComponent<EnemyController>();
-                    if (!enemy.IsDead())
-                    {
+                    Controller enemy = hit.collider.gameObject.GetComponent<Controller>();
+                    
                         Instantiate(bloodSplatter, hit.point, Quaternion.LookRotation(hit.normal));
                         if (hit.point.y > hit.collider.gameObject.transform.position.y + 1.7f){
                             enemy.TakeDamage(damage*2);
                             
                         }
                         else enemy.TakeDamage(damage);
-                    }
+                    
                     
                     
                     
