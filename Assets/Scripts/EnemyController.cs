@@ -24,9 +24,7 @@ public class EnemyController : MonoBehaviour, Controller
     protected float maxDetectionRange = 50f;
     protected float minimumDetectionRange = 6f;
     private bool enemyCountReduced = false;
-    private WaveSpawningController waveSpawningSystem;
     private float medKitDropChance = 0.1f;
-    private DifficultyManagement difficultyManagementSystem;
 
 
     public void EnableDumbAI(){
@@ -52,14 +50,9 @@ public class EnemyController : MonoBehaviour, Controller
     {
         playerGameObj = GameObject.FindWithTag("Player");
         player = playerGameObj.transform;
-        difficultyManagementSystem = GameObject.FindWithTag("GameController").GetComponent<DifficultyManagement>();
-        difficultyManagementSystem.UpdateEnemyDifficulty(gameObject);
+
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-        GameObject spawn = Instantiate(spawnEffect, transform.position + new Vector3(0f, 1f), Quaternion.identity);
-        spawn.transform.parent = transform;
-        waveSpawningSystem = GameObject.FindWithTag("GameController").GetComponent<WaveSpawningController>();
-
     }
 
     protected void Update()
@@ -77,7 +70,6 @@ public class EnemyController : MonoBehaviour, Controller
     protected void Die()
     {
         dead = true;
-        waveSpawningSystem.DecEnemiesLeft();//tells wave spawning system that an enemy has died
         DropMedKit();
         
     }

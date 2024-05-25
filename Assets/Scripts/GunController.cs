@@ -106,6 +106,7 @@ public class GunController : MonoBehaviour
         }
     }
     private void AddAnimationClips(){
+
         DeleteAllAnimationClips(animation);
         animation.AddClip(equipAnimation, "Equip");
         animation.AddClip(putAwayAnimation, "PutAway");
